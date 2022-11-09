@@ -1,0 +1,21 @@
+.bg{
+  background-image: url("Media/b4.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  background-attachment: fixed;
+  .signup{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+  }
+  .card{
+    color: black !important;
+    font-weight: 500;
+    background-color: #00544E;
+    border-radius: 10px !important;
+    padding: 50px 100px;
+  }
+}
+
