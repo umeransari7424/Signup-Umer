@@ -49,7 +49,7 @@ function Signup({title , setEmail, setPassword  ,handleAction}) {
                   <button type="Submit" className="btn btn-primary" 
                   onClick={handleAction}
                   >
-                    Register
+                    {title}
                   </button>
                 </div>
                 <br />

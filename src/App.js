@@ -4,9 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {  Routes, Route , useNavigate } from "react-router-dom";
 import {useEffect,useState} from 'react';
 // import Login from './Components/Elements/Login';
+// eslint-disable-next-line
 import {app} from './firebase';
 import {getAuth ,signInWithEmailAndPassword , createUserWithEmailAndPassword} from 'firebase/auth'; 
-// import Home from './Components/Elements/Home';
+import Home from './Components/Elements/Home';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -20,14 +21,14 @@ function App() {
     if (authToken) {
       navigate("/home");
     }
-  }, []);
+  }, [navigate]);
 
   const handleAction =(id) => {
     const authenticate = getAuth();
     if (id===2){
       createUserWithEmailAndPassword(authenticate,email,password).then((response)=>{
-        navigate("/home");
-        sessionStorage.setItem("auth", response._tokenResponse.refreshToken);
+        navigate("/login");
+        // sessionStorage.setItem("auth", response._tokenResponse.refreshToken);
 
       }).catch((e) => {
         if (e.code === "auth/wrong-password") {
@@ -60,8 +61,8 @@ function App() {
     <div >
     <ToastContainer />
         <Routes>
-          {/* <Routes path='/home' element={<Home/>} ></Routes>/ */}
-          <Route  path="/signup" element={<Signup  
+          <Route path='/home' element={<Home/>} ></Route>
+          <Route  path="/" element={<Signup  
           setEmail={setEmail} 
           setPassword={setPassword} 
           handleAction={()=>handleAction(2)}

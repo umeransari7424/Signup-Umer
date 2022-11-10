@@ -13,7 +13,7 @@ function Home() {
       if (!authToken) {
         navigate("/login");
       }
-    }, []);
+    }, [navigate]);
   
     const logout = () => {
       sessionStorage.removeItem("auth");
@@ -31,7 +31,7 @@ function Home() {
                     <h2>Welcome To Home</h2>
                 </div>
                 <div>
-                <button type="button" class="btn btn-primary" onClick={logout}>
+                <button type="button" className="btn btn-primary" onClick={logout}>
                     logout
                   </button>
                 </div>
