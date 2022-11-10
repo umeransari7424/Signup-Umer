@@ -3,13 +3,16 @@ import Signup from './Components/Elements/Signup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {  Routes, Route , useNavigate } from "react-router-dom";
 import {useEffect,useState} from 'react';
-// import Login from './Components/Elements/Login';
+// import Loginform from './Components/Elements/Login';
 // eslint-disable-next-line
 import {app} from './firebase';
+
+// import db from './firebase';
 import {getAuth ,signInWithEmailAndPassword , createUserWithEmailAndPassword} from 'firebase/auth'; 
 import Home from './Components/Elements/Home';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loginform from './Components/Elements/Login';
 
 function App() {
   const [email,setEmail] = useState("");
@@ -28,7 +31,7 @@ function App() {
     if (id===2){
       createUserWithEmailAndPassword(authenticate,email,password).then((response)=>{
         navigate("/login");
-        // sessionStorage.setItem("auth", response._tokenResponse.refreshToken);
+        sessionStorage.setItem("auth", response._tokenResponse.refreshToken);
 
       }).catch((e) => {
         if (e.code === "auth/wrong-password") {
@@ -62,14 +65,15 @@ function App() {
     <ToastContainer />
         <Routes>
           <Route path='/home' element={<Home/>} ></Route>
-          <Route  path="/" element={<Signup  
+
+          <Route index  path="/" element={<Signup  
           setEmail={setEmail} 
           setPassword={setPassword} 
           handleAction={()=>handleAction(2)}
            title={"Register"}
             />}
            />
-          <Route  path="/login" element={<Signup  
+          <Route  path="/login" element={<Loginform 
           setEmail={setEmail} 
           setPassword={setPassword}
            handleAction={()=>handleAction(1)} 

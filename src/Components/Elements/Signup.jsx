@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Signup({title , setEmail, setPassword  ,handleAction}) {
   return (
@@ -53,7 +53,9 @@ function Signup({title , setEmail, setPassword  ,handleAction}) {
                   </button>
                 </div>
                 <br />
-                <span> Do you have an account?&nbsp;</span>
+                <span> Do you have an account?&nbsp;
+                  <Link to="/login">Login</Link>
+                </span>
               </div>{" "}
             {/* </form> */}
           </div>

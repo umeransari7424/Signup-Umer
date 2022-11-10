@@ -1,22 +1,22 @@
 import React from 'react'
-
-function Login() {
+import {Link } from 'react-router-dom'
+function Login({title,setEmail,setPassword,handleAction}) {
   return (
     <div className="bg">
     <div className="container py-5">
       <div className="row">
         <div className="col-md-2"></div>
-        <div className="col-md-8 signup">
+        <div className="col-md-8 login">
           <form className="form-group">
             <div className="card " style={{ width: "500px" }}>
             <div>
                   <h2>
-                   Login Form
+                   {title} Form
                   </h2>
                 </div>
               <br />
               <div>
-                <label for="exampleFormControlInput1" class="form-label">
+                <label for="exampleFormControlInput1" className="form-label">
                   Email :
                 </label>
 
@@ -24,12 +24,13 @@ function Login() {
                   className="form-control"
                   type="email"
                   required
+                  onChange={(e)=>setEmail(e.target.value)}
                   placeholder="Enter Your Email"
                 />
               </div>
               <br />
               <div>
-                <label for="exampleFormControlInput1" class="form-label">
+                <label for="exampleFormControlInput1" className="form-label">
                   Password :
                 </label>
 
@@ -37,22 +38,20 @@ function Login() {
                   className="form-control"
                   type="password"
                   required
+                  onChange={(e)=>setPassword(e.target.value)}
                   placeholder="Enter Your Password"
                 />
               </div>
               <br />
-
-              
-
-              
-
               <div>
-                <button type="Submit" class="btn btn-primary">
+                <button type="button" className="btn btn-primary" onClick={handleAction}>
                   Login
                 </button>
               </div>
               <br />
-              <span> You don't have an Account &nbsp;</span>
+              <span>If You don't have an Account &nbsp;
+                <Link to="/">SignUp</Link>
+              </span>
             </div>{" "}
           </form>
         </div>

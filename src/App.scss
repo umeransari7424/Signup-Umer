@@ -10,6 +10,12 @@
     justify-content: center;
     height: 90vh;
   }
+  .login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+  }
   .card{
     color: black !important;
     font-weight: 500;
@@ -17,5 +23,56 @@
     border-radius: 10px !important;
     padding: 50px 100px;
   }
+}
+
+@media screen and (max-width:"600px"){
+  .bg{
+    background-image: url("Media/b4.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+   
+    background-attachment: fixed;
+    .signup{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 90vh;
+    }
+   
+    .card{
+      width: 280px !important;
+      color: black !important;
+      font-weight: 500;
+      background-color: #00544E;
+      border-radius: 10px !important;
+      padding: 20px 40px !important;
+    }
+  }
+
+  .bg{
+    background-image: url("Media/b4.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+   width: 100%;
+    background-attachment: fixed;
+   
+    .login{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 90vh;
+    }
+    .card{
+      color: black !important;
+      font-weight: 500;
+      background-color: #00544E;
+      border-radius: 10px !important;
+      padding: 20px 20px !important;
+    }
+  }
+
+  
 }
 
