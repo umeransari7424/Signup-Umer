@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {  Routes, Route , useNavigate } from "react-router-dom";
 import {useEffect,useState} from 'react';
 // import Login from './Components/Elements/Login';
-// import {app} from './firebase';
+import {app} from './firebase';
 import {getAuth ,signInWithEmailAndPassword , createUserWithEmailAndPassword} from 'firebase/auth'; 
 // import Home from './Components/Elements/Home';
 import { ToastContainer, toast } from "react-toastify";
@@ -60,8 +60,8 @@ function App() {
     <div >
     <ToastContainer />
         <Routes>
-          {/* <Routes path='/home' element={<Home/>} ></Routes> */}
-          <Route  path="/" element={<Signup  
+          {/* <Routes path='/home' element={<Home/>} ></Routes>/ */}
+          <Route  path="/signup" element={<Signup  
           setEmail={setEmail} 
           setPassword={setPassword} 
           handleAction={()=>handleAction(2)}

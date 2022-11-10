@@ -8,7 +8,7 @@ function Signup({title , setEmail, setPassword  ,handleAction}) {
         <div className="row">
           <div className="col-md-2"></div>
           <div className="col-md-8 signup">
-            <form className="form-group" >
+            {/* <form className="form-group" > */}
               <div className="card " style={{ width: "500px" }}>
                 <div>
                   <h2>
@@ -55,7 +55,7 @@ function Signup({title , setEmail, setPassword  ,handleAction}) {
                 <br />
                 <span> Do you have an account?&nbsp;</span>
               </div>{" "}
-            </form>
+            {/* </form> */}
           </div>
         </div>
         <div className="col-md-2"></div>

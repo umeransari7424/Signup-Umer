@@ -31,7 +31,7 @@ function Home() {
                     <h2>Welcome To Home</h2>
                 </div>
                 <div>
-                <button type="Submit" class="btn btn-primary" onClick={logout}>
+                <button type="button" class="btn btn-primary" onClick={logout}>
                     logout
                   </button>
                 </div>
