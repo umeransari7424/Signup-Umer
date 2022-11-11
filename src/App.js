@@ -4,10 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {  Routes, Route , useNavigate } from "react-router-dom";
 import {useEffect,useState} from 'react';
 // import Loginform from './Components/Elements/Login';
-// eslint-disable-next-line
-import {app} from './firebase';
 
-// import db from './firebase';
+// import {app} from './firebase';
+import { addDoc, collection } from "firebase/firestore"; 
+
+import db from './firebase';
 import {getAuth ,signInWithEmailAndPassword , createUserWithEmailAndPassword} from 'firebase/auth'; 
 import Home from './Components/Elements/Home';
 import { ToastContainer, toast } from "react-toastify";
@@ -32,6 +33,10 @@ function App() {
       createUserWithEmailAndPassword(authenticate,email,password).then((response)=>{
         navigate("/login");
         // sessionStorage.setItem("auth", response._tokenResponse.refreshToken);
+         addDoc(collection(db, "users"), {
+         email:email,
+         password:password,
+        });
 
       }).catch((e) => {
         if (e.code === "auth/wrong-password") {
