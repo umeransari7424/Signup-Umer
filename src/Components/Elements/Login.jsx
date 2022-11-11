@@ -16,7 +16,7 @@ function Login({title,setEmail,setPassword,handleAction}) {
                 </div>
               <br />
               <div>
-                <label for="exampleFormControlInput1" className="form-label">
+                <label htmlFor="exampleFormControlInput1" className="form-label">
                   Email :
                 </label>
 
@@ -30,7 +30,7 @@ function Login({title,setEmail,setPassword,handleAction}) {
               </div>
               <br />
               <div>
-                <label for="exampleFormControlInput1" className="form-label">
+                <label htmlFor="exampleFormControlInput1" className="form-label">
                   Password :
                 </label>
 

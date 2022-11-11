@@ -32,7 +32,7 @@ function Home() {
                 </div>
                 <div>
                 <button type="button" className="btn btn-primary" onClick={logout}>
-                    logout
+                    LogOut
                   </button>
                 </div>
               </div>
