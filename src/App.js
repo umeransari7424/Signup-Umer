@@ -31,7 +31,7 @@ function App() {
     if (id===2){
       createUserWithEmailAndPassword(authenticate,email,password).then((response)=>{
         navigate("/login");
-        sessionStorage.setItem("auth", response._tokenResponse.refreshToken);
+        // sessionStorage.setItem("auth", response._tokenResponse.refreshToken);
 
       }).catch((e) => {
         if (e.code === "auth/wrong-password") {
