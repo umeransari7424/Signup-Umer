@@ -6,14 +6,15 @@ import {useEffect,useState} from 'react';
 // import Loginform from './Components/Elements/Login';
 
 // import {app} from './firebase';
-import { addDoc, collection } from "firebase/firestore"; 
+import { addDoc, collection,} from "firebase/firestore"; 
 
 import db from './firebase';
-import {getAuth ,signInWithEmailAndPassword , createUserWithEmailAndPassword} from 'firebase/auth'; 
+import {getAuth ,signInWithEmailAndPassword , createUserWithEmailAndPassword ,sendPasswordResetEmail} from 'firebase/auth'; 
 import Home from './Components/Elements/Home';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loginform from './Components/Elements/Login';
+import Resetpassword from './Components/Elements/Resetpassword';
 
 function App() {
   const [email,setEmail] = useState("");
@@ -29,10 +30,13 @@ function App() {
 
   const handleAction =(id) => {
     const authenticate = getAuth();
+    // const user = authenticate.currentUser;
     if (id===2){
       createUserWithEmailAndPassword(authenticate,email,password).then((response)=>{
         navigate("/login");
         // sessionStorage.setItem("auth", response._tokenResponse.refreshToken);
+        // const uid = user.uid;
+        
          addDoc(collection(db, "users"), {
          email:email,
          password:password,
@@ -47,6 +51,7 @@ function App() {
         }
       });
   };
+
     
   if (id === 1) {
     signInWithEmailAndPassword(authenticate, email, password)
@@ -55,7 +60,7 @@ function App() {
         sessionStorage.setItem("auth", response._tokenResponse.refreshToken);
       })
       .catch((e) => {
-        if (e.code === "auth/wrong-password") {
+        if (e.code === "auth/wrong-address") {
           toast.error("please check the password");
         }
         if (e.code === "auth/user-not-found") {
@@ -64,6 +69,25 @@ function App() {
       });
   }
 };
+const forgetPassword=()=>{
+  navigate('/resetpassword')
+}
+
+const resetAction=()=>{
+  
+  const auth = getAuth();
+  sendPasswordResetEmail(auth, email)
+    .then(() => {
+      
+      console.log("click here")
+    })
+    .catch((error) => {
+      console.log(error);
+      
+    });
+  
+
+}
   
   return (
     <div >
@@ -82,8 +106,17 @@ function App() {
           setEmail={setEmail} 
           setPassword={setPassword}
            handleAction={()=>handleAction(1)} 
+           forgetPassword={()=>forgetPassword()}
            title={"Login"} 
            />} />
+          <Route path='/resetpassword' element={<Resetpassword
+          title={"Reset Password"}
+          setEmail={setEmail}
+          resetAction={()=>resetAction()}
+          />} 
+          
+
+          />
 
           {/* <Route path="/login" element={<Login setEmail={setEmail} setPassword={setPassword} handleAction={()=>handleAction(2)}  />} /> */}
         </Routes>

@@ -1,6 +1,6 @@
 import React from 'react'
-import {Link } from 'react-router-dom'
-function Login({title,setEmail,setPassword,handleAction,forgetPassword}) {
+
+function Resetpassword({title,setEmail,resetAction}) {
   return (
     <div className="bg">
     <div className="container py-5">
@@ -11,7 +11,7 @@ function Login({title,setEmail,setPassword,handleAction,forgetPassword}) {
             <div className="card " style={{ width: "500px" }}>
             <div>
                   <h2>
-                   {title} Form
+                   {title}
                   </h2>
                 </div>
               <br />
@@ -30,31 +30,13 @@ function Login({title,setEmail,setPassword,handleAction,forgetPassword}) {
               </div>
               <br />
               <div>
-                <label htmlFor="exampleFormControlInput1" className="form-label">
-                  Password :
-                </label>
-
-                <input
-                  className="form-control"
-                  type="password"
-                  required
-                  onChange={(e)=>setPassword(e.target.value)}
-                  placeholder="Enter Your Password"
-                />
-              </div>
-              <br />
-              <div>
-                <button type="button" className="btn btn-primary" onClick={handleAction}>
-                  Login
-                </button> &nbsp; &nbsp;
-                <button type="button" className="btn btn-primary" onClick={forgetPassword}>
-                  Forget Password
+                
+                <button type="button" className="btn btn-primary" onClick={resetAction}>
+                  Reset Password
                 </button>
               </div>
               <br />
-              <span>If You don't have an Account &nbsp;
-                <Link to="/">SignUp</Link>
-              </span>
+             
             </div>{" "}
           </form>
         </div>
@@ -65,4 +47,4 @@ function Login({title,setEmail,setPassword,handleAction,forgetPassword}) {
   )
 }
 
-export default Login
+export default Resetpassword
