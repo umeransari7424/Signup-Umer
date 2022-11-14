@@ -6,7 +6,7 @@ import {useEffect,useState} from 'react';
 // import Loginform from './Components/Elements/Login';
 
 // import {app} from './firebase';
-import { addDoc, collection,} from "firebase/firestore"; 
+import { doc, setDoc,} from "firebase/firestore"; 
 
 import db from './firebase';
 import {getAuth ,signInWithEmailAndPassword , createUserWithEmailAndPassword ,sendPasswordResetEmail} from 'firebase/auth'; 
@@ -15,6 +15,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loginform from './Components/Elements/Login';
 import Resetpassword from './Components/Elements/Resetpassword';
+// import Reset from './Components/Elements/Reset';
 
 function App() {
   const [email,setEmail] = useState("");
@@ -37,7 +38,8 @@ function App() {
         // sessionStorage.setItem("auth", response._tokenResponse.refreshToken);
         // const uid = user.uid;
         
-         addDoc(collection(db, "users"), {
+        setDoc(doc(db, "users",response.user.uid), {
+          uid:response.user.uid,
          email:email,
          password:password,
         });
@@ -75,11 +77,16 @@ const forgetPassword=()=>{
 
 const resetAction=()=>{
   
-  const auth = getAuth();
-  sendPasswordResetEmail(auth, email)
+  const authenticate = getAuth();
+  sendPasswordResetEmail(authenticate, email)
     .then(() => {
-      
-      console.log("click here")
+      console.log('email sent successfully')
+      toast({
+        title :'Email sent successfully',
+        status : 'success',
+        isclose: true
+      })
+
     })
     .catch((error) => {
       console.log(error);
@@ -114,9 +121,8 @@ const resetAction=()=>{
           setEmail={setEmail}
           resetAction={()=>resetAction()}
           />} 
-          
-
           />
+          {/* <Route path='/reset' element={<Reset/>}/> */}
 
           {/* <Route path="/login" element={<Login setEmail={setEmail} setPassword={setPassword} handleAction={()=>handleAction(2)}  />} /> */}
         </Routes>

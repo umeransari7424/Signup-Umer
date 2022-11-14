@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function Resetpassword({title,setEmail,resetAction}) {
+function Reset([setPassword,resetpassword]) {
   return (
     <div className="bg">
     <div className="container py-5">
@@ -12,27 +12,27 @@ function Resetpassword({title,setEmail,resetAction}) {
             <div className="card " style={{ width: "500px" }}>
             <div>
                   <h2>
-                   {title}
+                   Resetpassword
                   </h2>
                 </div>
               <br />
               <div>
                 <label htmlFor="exampleFormControlInput1" className="form-label">
-                  Email :
+                  Password :
                 </label>
 
                 <input
                   className="form-control"
-                  type="email"
+                  type="password"
                   required
-                  onChange={(e)=>setEmail(e.target.value)}
-                  placeholder="Enter Your Email"
+                  onChange={(e)=>setPassword(e.target.value)}
+                  placeholder="Enter Your Password"
                 />
               </div>
               <br />
               <div>
                 
-                <button type="button" className="btn btn-primary" onClick={resetAction}>
+                <button type="button" className="btn btn-primary" onClick={resetpassword}>
                   Reset Password
                 </button>
                 <br /> <br />
@@ -52,4 +52,4 @@ function Resetpassword({title,setEmail,resetAction}) {
   )
 }
 
-export default Resetpassword
+export default Reset;
