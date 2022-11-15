@@ -73,6 +73,7 @@ function App() {
 };
 const forgetPassword=()=>{
   navigate('/resetpassword')
+  
 }
 
 const resetAction=()=>{
@@ -81,11 +82,12 @@ const resetAction=()=>{
   sendPasswordResetEmail(authenticate, email)
     .then(() => {
       console.log('email sent successfully')
-      toast({
+      toast.info({
         title :'Email sent successfully',
         status : 'success',
-        isclose: true
+    
       })
+     
 
     })
     .catch((error) => {
