@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Signup({title , setEmail, setPassword  ,handleAction}) {
+function Signup({title,setName ,setContact,setAddress, setEmail, setPassword  ,handleAction}) {
   return (
     <div className="bg">
       <div className="container py-5">
-        <div className="row">
+        <div className="row py-5">
           <div className="col-md-2"></div>
           <div className="col-md-8 signup">
             {/* <form className="form-group" > */}
@@ -15,8 +15,43 @@ function Signup({title , setEmail, setPassword  ,handleAction}) {
                     {title} Form
                   </h2>
                 </div><br />
+              <div>
+                <label htmlFor="name" className="form-label">
+                  Name :
+                </label>
+                <input type="name" 
+                className="form-control" 
+                required 
+                placeholder="Enter Your Name"
+                onChange={(e)=>setName(e.target.value)}
+                />
+              </div>
                
                 <br />
+                <div>
+                <label htmlFor="contact" className="form-label">
+                  contact :
+                </label>
+                <input type="integer" 
+                className="form-control" 
+                required 
+                placeholder="Enter Your Name"
+                onChange={(e)=>setContact(e.target.value)}
+                />
+              </div>
+              <br />
+              <div>
+                <label htmlFor="name" className="form-label">
+                  Address :
+                </label>
+                <input type="address" 
+                className="form-control" 
+                required 
+                placeholder="Enter Your Name"
+                onChange={(e)=>setAddress(e.target.value)}
+                />
+              </div>
+              <br />
                 <div>
                   <label htmlFor="exampleFormControlInput1" className="form-label">
                     Email :

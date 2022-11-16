@@ -10,6 +10,9 @@
     justify-content: center;
     height: 90vh;
   }
+  h1{
+    color: white !important;
+  }
   .login{
     display: flex;
     align-items: center;
@@ -24,10 +27,12 @@
   }
   .card{
     color: black !important;
+    margin-top: 50px;
+    margin-bottom: 50px;
     font-weight: 500;
     background-color: #00544E;
     border-radius: 10px !important;
-    padding: 50px 100px;
+    padding: 30px 100px;
   }
 }
 

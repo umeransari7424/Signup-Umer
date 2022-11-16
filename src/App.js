@@ -6,7 +6,7 @@ import {useEffect,useState} from 'react';
 // import Loginform from './Components/Elements/Login';
 
 // import {app} from './firebase';
-import { doc, setDoc,} from "firebase/firestore"; 
+import { doc, setDoc, } from "firebase/firestore"; 
 
 import db from './firebase';
 import {getAuth ,signInWithEmailAndPassword , createUserWithEmailAndPassword ,sendPasswordResetEmail} from 'firebase/auth'; 
@@ -20,6 +20,10 @@ import Resetpassword from './Components/Elements/Resetpassword';
 function App() {
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
+  const [name,setName] = useState("");
+  const [contact,setContact] = useState("");
+  const [address,setAddress] = useState("");
+
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -39,9 +43,12 @@ function App() {
         // const uid = user.uid;
         
         setDoc(doc(db, "users",response.user.uid), {
-          uid:response.user.uid,
-         email:email,
-         password:password,
+        uid:response.user.uid,
+        name:name,
+        contact:contact,
+        address:address,
+        email:email,
+        password:password,
         });
 
       }).catch((e) => {
@@ -60,6 +67,8 @@ function App() {
       .then((response) => {
         navigate("/home");
         sessionStorage.setItem("auth", response._tokenResponse.refreshToken);
+        // console.log(response.user.uid,email,password)
+        
       })
       .catch((e) => {
         if (e.code === "auth/wrong-address") {
@@ -82,7 +91,7 @@ const resetAction=()=>{
   sendPasswordResetEmail(authenticate, email)
     .then(() => {
       console.log('email sent successfully')
-      toast.info({
+      toast({
         title :'Email sent successfully',
         status : 'success',
     
@@ -97,15 +106,23 @@ const resetAction=()=>{
   
 
 }
+
   
   return (
     <div >
     <ToastContainer />
         <Routes>
-          <Route path='/home' element={<Home/>} ></Route>
+          <Route path='/home' element={<Home
+        
+          
+         
+          />} ></Route>
 
           <Route index  path="/" element={<Signup  
           setEmail={setEmail} 
+          setName={setName}
+          setContact={setContact}
+          setAddress={setAddress}
           setPassword={setPassword} 
           handleAction={()=>handleAction(2)}
            title={"Register"}
