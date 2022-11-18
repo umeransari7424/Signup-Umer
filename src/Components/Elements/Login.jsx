@@ -55,6 +55,11 @@ function Login({title,setEmail,setPassword,handleAction,forgetPassword}) {
               <span>If You don't have an Account &nbsp;
                 <Link to="/">SignUp</Link>
               </span>
+              <Link to='/userdata'>
+              <button type="button" className="btn btn-primary"  >
+                  Show Details 
+                  </button>
+              </Link>
             </div>{" "}
           </form>
         </div>

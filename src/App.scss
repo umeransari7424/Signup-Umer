@@ -35,7 +35,29 @@
     padding: 30px 100px;
   }
 }
-
+  // .tablebg{
+  //   background-color: black;
+  // }
+    .table{
+      background-color: #00544E !important;
+      color : #fff !important;
+      border-radius: 10px !important;
+      padding: 20px !important;
+      // border-color:  black !important;
+     
+    }
+    label progress {
+      width: 35px;
+    }
+    label img {
+      width: 70px;
+      height: 70px;
+    }
+    
+    #input-file {
+      display: none !important;
+    }
+  
 @media screen and (max-width:"600px"){
   .bg{
     background-image: url("Media/b4.png");

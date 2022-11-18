@@ -1,13 +1,38 @@
-// import { FirebaseError } from "firebase/app";
-import React from "react";
-import { Link } from "react-router-dom";
-// import firebase from "../../firebase"
-// import {FaCamera} from "react-icons/fa"
+import { doc, setDoc } from 'firebase/firestore';
+import React, { useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import {db} from '../../firebase';
 
-function Signup({title,setName ,setContact,setAddress,handleFileChange, setEmail, setPassword  ,handleAction}) {
-  
+function Update() {
+    const {id} = useParams();
+  const [name, setName] = useState("");
+  const [contact, setContact] = useState("");
+  const [address, setAddress] = useState("");
+  const navigate = useNavigate();
+
+  const updateUser = (e) => {
+    e.preventDefault();
+    const docRef = doc(db, "users", id);
+    const data = {
+      name,
+      contact,
+      address
+    };
+    setDoc(docRef , data ,{ merge: true } ).then(() =>{
+      toast('Data Updated SuccessFully')
+    },setName(''),setContact('') , setAddress('')) 
+    
+  }
+
+
+  const logout = () => {
+    sessionStorage.removeItem("auth");
+    navigate("/login");
+  };
   return (
-    <div className="bg">
+    <div>
+        <div className="bg">
       <div className="container py-5">
         <div className="row py-5">
           <div className="col-md-2"></div>
@@ -16,7 +41,7 @@ function Signup({title,setName ,setContact,setAddress,handleFileChange, setEmail
               <div className="card " style={{ width: "500px" }}>
                 <div>
                   <h2>
-                    {title} Form
+                    Update Form
                   </h2>
                 </div><br />
               <div>
@@ -55,53 +80,21 @@ function Signup({title,setName ,setContact,setAddress,handleFileChange, setEmail
                 onChange={(e)=>setAddress(e.target.value)}
                 />
               </div>
-              <br />
-                <div>
-                  <label htmlFor="exampleFormControlInput1" className="form-label">
-                    Email :
-                  </label>
-
-                  <input
-                    className="form-control"
-                    type="email"
-                    required
-                    placeholder="Enter Your Email"
-                    onChange={(e)=>setEmail(e.target.value)}
-                  />
-                </div>
-                <br />
-                <div>
-                  <label htmlFor="exampleFormControlInput1" className="form-label">
-                    Password :
-                  </label>
-
-                  <input
-                    className="form-control"
-                    type="password"
-                    required
-                    onChange={(e)=>setPassword(e.target.value)}
-                    placeholder="Enter Your Password"
-                  />
-                </div>
-                <br />
-                <input class="form-control" type="file" onChange={handleFileChange} id="formFile"></input>
                 <br />
                 <div>
                   <button type="Submit" className="btn btn-primary" 
-                  onClick={handleAction}
+                  onClick={updateUser}
                   >
-                    {title}
+                    Save
+                  </button> &nbsp; &nbsp;
+                  <button type="Submit" className="btn btn-primary" 
+                  onClick={logout}
+                  >
+                    Logout
                   </button>
                 </div>
                 <br />
                 
-                <span> Do you have an account?&nbsp;
-                  <Link to="/login">Login</Link>
-                </span>
-                <br />
-                <span> Do you have an account?&nbsp;
-                  <Link to="/upload">Login</Link>
-                </span>
               </div>{" "}
             {/* </form> */}
           </div>
@@ -109,8 +102,8 @@ function Signup({title,setName ,setContact,setAddress,handleFileChange, setEmail
         <div className="col-md-2"></div>
       </div>
     </div>
-    // </div>
-  );
+    </div>
+  )
 }
 
-export default Signup;
+export default Update

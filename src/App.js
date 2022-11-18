@@ -3,19 +3,20 @@ import Signup from './Components/Elements/Signup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {  Routes, Route , useNavigate } from "react-router-dom";
 import {useEffect,useState} from 'react';
-// import Loginform from './Components/Elements/Login';
-
-// import {app} from './firebase';
 import { doc, setDoc, } from "firebase/firestore"; 
-
-import db from './firebase';
+import {db} from './firebase';
 import {getAuth ,signInWithEmailAndPassword , createUserWithEmailAndPassword ,sendPasswordResetEmail} from 'firebase/auth'; 
 import Home from './Components/Elements/Home';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loginform from './Components/Elements/Login';
 import Resetpassword from './Components/Elements/Resetpassword';
-// import Reset from './Components/Elements/Reset';
+import Userdata from './Components/Elements/Userdata';
+import Update from './Components/Elements/Update';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { uploadBytes } from 'firebase/storage';
+import {storage} from './firebase'
+import Upload from './Components/Elements/Upload';
 
 function App() {
   const [email,setEmail] = useState("");
@@ -23,6 +24,50 @@ function App() {
   const [name,setName] = useState("");
   const [contact,setContact] = useState("");
   const [address,setAddress] = useState("");
+  const [file,setFile] = useState("");
+  const [progress,setProgress] = useState(0);;
+
+  const handleFileChange = (e) => {
+
+    const storage = getStorage();
+    const storageRef = ref(storage, 'images/');
+    
+    const uploadTask = uploadBytesResumable(storageRef, e.target.files[0]);
+
+    
+    // Register three observers:
+    // 1. 'state_changed' observer, called any time the state changes
+    // 2. Error observer, called on failure
+    // 3. Completion observer, called on successful completion
+    uploadTask.on('state_changed', 
+    (snapshot) => {
+        // Observe state change events such as progress, pause, and resume
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setProgress(progress)
+        console.log('Upload is ' + progress + '% done');
+        switch (snapshot.state) {
+            case 'paused':
+                console.log('Upload is paused');
+                break;
+                case 'running':
+                    console.log('Upload is running');
+                    break;
+                }
+            }, 
+            (error) => {
+                // Handle unsuccessful uploads
+            }, 
+            () => {
+                // Handle successful uploads on complete
+                // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    console.log('File available at', downloadURL);
+                    setFile(downloadURL)
+                });
+            }
+            );
+        }
 
   const navigate = useNavigate();
   
@@ -45,11 +90,14 @@ function App() {
         setDoc(doc(db, "users",response.user.uid), {
         uid:response.user.uid,
         name:name,
+        img:setFile,
         contact:contact,
         address:address,
         email:email,
         password:password,
         });
+    //     if(uploadFile == null) return;
+    // 
 
       }).catch((e) => {
         if (e.code === "auth/wrong-password") {
@@ -60,7 +108,7 @@ function App() {
         }
       });
   };
-
+  
     
   if (id === 1) {
     signInWithEmailAndPassword(authenticate, email, password)
@@ -110,18 +158,18 @@ const resetAction=()=>{
   
   return (
     <div >
+     
     <ToastContainer />
         <Routes>
-          <Route path='/home' element={<Home
-        
-          
-         
-          />} ></Route>
-
+          <Route path='/home' element={<Home/>} ></Route>
+          <Route path='/userdata' element={<Userdata/>} />
+          <Route path='/upload' element={<Upload/>} />
+          <Route path='/update/:id' element={<Update/>} />
           <Route index  path="/" element={<Signup  
           setEmail={setEmail} 
           setName={setName}
           setContact={setContact}
+          handleFileChange={handleFileChange}
           setAddress={setAddress}
           setPassword={setPassword} 
           handleAction={()=>handleAction(2)}
@@ -141,9 +189,7 @@ const resetAction=()=>{
           resetAction={()=>resetAction()}
           />} 
           />
-          {/* <Route path='/reset' element={<Reset/>}/> */}
-
-          {/* <Route path="/login" element={<Login setEmail={setEmail} setPassword={setPassword} handleAction={()=>handleAction(2)}  />} /> */}
+          
         </Routes>
    
     </div>
