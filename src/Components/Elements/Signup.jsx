@@ -99,9 +99,7 @@ function Signup({title,setName ,setContact,setAddress,handleFileChange, setEmail
                   <Link to="/login">Login</Link>
                 </span>
                 <br />
-                <span> Do you have an account?&nbsp;
-                  <Link to="/upload">Login</Link>
-                </span>
+                
               </div>{" "}
             {/* </form> */}
           </div>
